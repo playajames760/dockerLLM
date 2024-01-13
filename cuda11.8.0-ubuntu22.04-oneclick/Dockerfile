@@ -37,4 +37,12 @@ COPY --chmod=755 start-with-ui.sh /start.sh
 
 WORKDIR /workspace
 
+# Install MemGPT
+RUN pip install poetry
+RUN git clone https://github.com/cpacker/MemGPT.git memgpt
+
+WORKDIR memgpt
+RUN poetry shell
+RUN poetry install --all-extras
+
 ENTRYPOINT [ "/start.sh" ]
